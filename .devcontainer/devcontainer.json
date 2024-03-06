@@ -3,19 +3,31 @@
 {
 	"name": "nodejs-devcontainer-level-1",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye"
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "yarn install",
+	"postCreateCommand": "yarn install",
+	
+	"portsAttributes": {
+		"8000": {
+			"label": "API",
+			"onAutoForward": "openPreview"
+		}
+	},
 
-	// Configure tool-specific properties.
-	// "customizations": {},
+  // Jetzt bestimmen wir noch, welche VS-Code Extentions automatisch remote installiert werden sollen.
+  // Diese Extensions werden nicht auf unserem lokalen System installiert sonder stehen dann allen
+  // Nutzern dieses Containers zur Verfügung - auch wenn die nicht lokal vorhanden sind.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"humao.rest-client"
+			]
+		}
+	}
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
